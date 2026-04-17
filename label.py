@@ -42,7 +42,7 @@ def rechercher_artiste(catalogue:list,critere:str,valeur:str):
 def ajouter_artistes(catalogue:list,artiste:dict):
     #création du champ et vérification
     champ_requis=["id","nom","genre","pays","albums"]
-    for champ in champs_requis:
+    for champ in champ_requis:
         if champ not in artiste:
             raise ValueError(f"champ obligatoire manquant :'{champ}'")
     #verifier si l'artiste n'existe pas déja
@@ -56,11 +56,12 @@ def ajouter_album(catalogue:list,id_artiste:str):
     #champ requis pour l'album
     champs=("titre","annee","streams")
     for champ in champs:
-        if champ not in album:
+        if champ not in champs:
             raise ValueError(f"champ obligatoire manquant :'{champ}'")
    #ajouter l'album si l'id correspond a l'id dans le catalogue
     for artiste in catalogue:
         if artiste.get("id")== id_artiste:
+            album={}
             artiste["albums"].append(album)
             return catalogue
     raise ValueError("artiste introuvable")

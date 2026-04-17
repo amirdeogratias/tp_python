@@ -9,17 +9,17 @@ from label import (
     obtenir_detail_artiste
 )
 from analyse import (
-    afficher_stats,
-    exporter_rapport
+    charger_et_aplatir,
+    top5_albums,
+    moyenne_par_genre,
+    comptage_par_annee,
+    exporter_csv
+
 )
 
 
 def main():
-    """
-    Point d'entree de l'application SahelSound Records.
-    Contient le menu principal et les sous-menus.
-    Aucune variable globale : tout passe par les parametres.
-    """
+   
     chemin_json = "catalogue.json"
     chemin_csv  = "rapport.csv"
 
@@ -45,7 +45,7 @@ def main():
         print("=" * 50)
         choix = input("Votre choix (1-5) : ").strip()
 
-        # ── OPTION 1 : CONSULTER ────────────────────────
+        #OPTION 1 : CONSULTER
         if choix == "1":
             while True:
                 print("\n" + "-" * 45)
@@ -123,7 +123,7 @@ def main():
                 else:
                     print("  Choix invalide. Entrez a, b, c ou r.")
 
-        # ── OPTION 2 : AJOUTER UN ARTISTE ───────────────
+        # OPTION 2 : AJOUTER UN ARTISTE 
         elif choix == "2":
             while True:
                 print("\n" + "-" * 45)
@@ -156,7 +156,7 @@ def main():
                 else:
                     print("  Choix invalide. Entrez a ou r.")
 
-        # ── OPTION 3 : AJOUTER UN ALBUM ─────────────────
+        # OPTION 3 : AJOUTER UN ALBUM 
         elif choix == "3":
             while True:
                 print("\n" + "-" * 45)
@@ -176,7 +176,7 @@ def main():
                         annee      = input("  Annee de sortie       : ").strip()
                         streams    = input("  Nombre de streams     : ").strip()
                         album = {"titre": titre, "annee": int(annee), "streams": int(streams)}
-                        catalogue = ajouter_album(catalogue, id_artiste, album)
+                        catalogue = ajouter_album(catalogue, id_artiste)
                         sauvegarder_catalogue(catalogue, chemin_json)
                         print(f"  Album '{titre}' ajoute et catalogue sauvegarde.")
                     except ValueError as e:
@@ -194,9 +194,10 @@ def main():
                 else:
                     print("  Choix invalide. Entrez a, b ou r.")
 
-        # ── OPTION 4 : STATISTIQUES ─────────────────────
+        #  OPTION 4 : STATISTIQUES 
         elif choix == "4":
             while True:
+                #catalogue_pandas=charger_et_aplatir("catalogue.json")
                 print("\n" + "-" * 45)
                 print("  4. Statistiques et rapport")
                 print("-" * 45)
@@ -208,15 +209,29 @@ def main():
                 print("-" * 45)
                 choix4 = input("Votre choix : ").strip().lower()
 
-                if choix4 in ("a", "b", "c"):
+                if choix4 =="a":
+
                     try:
-                        afficher_stats(chemin_json)
+                        five_artistes=top5_albums(catalogue)
+                        print(f"les 5 artistes par streams sont :{five_artistes}\n")
+                    except Exception as e:
+                        print(f"  Erreur : {e}")
+                elif choix4 =="b":
+                    try:
+                        moyenne_g=moyenne_par_genre(catalogue)
+                        print(f"la moyenne des streams par genre est :{moyenne_g}\n")
+                    except Exception as e:
+                        print(f"  Erreur : {e}")
+                elif choix4 =="c":
+                    try:
+                        albums_annee=comptage_par_annee(catalogue)
+                        print(f"le nombre d,albums sorties par annee est :{albums_annee}\n")
                     except Exception as e:
                         print(f"  Erreur : {e}")
 
                 elif choix4 == "d":
                     try:
-                        message = exporter_rapport(chemin_json, chemin_csv)
+                        message = exporter_csv(catalogue, chemin_csv)
                         print(f"  {message}")
                     except Exception as e:
                         print(f"  Erreur : {e}")
@@ -226,7 +241,7 @@ def main():
                 else:
                     print("  Choix invalide. Entrez a, b, c, d ou r.")
 
-        # ── OPTION 5 : QUITTER ──────────────────────────
+        #  OPTION 5 : QUITTER 
         elif choix == "5":
             print("\n  Au revoir et bonne ecoute !\n")
             break
