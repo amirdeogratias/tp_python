@@ -1,39 +1,22 @@
 import json
 import pandas as pd
-def charger_catalogue(chemin: str = "catalogue.json") -> pd.DataFrame:
-    with open(chemin, "r", encoding="utf-8") as f:
-        artistes = json.load(f)
-    
-    #Applatissement avec une liste par album
-    lignes = []
-    for artistes in lignes:
-        for albums in artistes.get("albums", []):
-            lignes.append({
-                "artiste_id": artistes.get("id"),
-                "nom": artistes.get("nom"),
-                "genre": artistes.get("genre"),
-                "pays": artistes.get("pays"),
-                "album_titre": albums.get("titre"),
-                "album_annee": albums.get("annee"),
-                "album_streams": albums.get("streams", 0)
-            })
-    df = pd.DataFrame(lignes)
-
-    #Typage explicite
-    if not df.empty:
-        df["album_annee"] = pd.to_numeric(df["album_annee"], errors="coerce").astype("Int64")
-        df["album_streams"] = pd.to_numeric(df["album_streams"], errors="coerce").fillna(0).astype(int)
-
+def charger_catalogue(catalogue:list) -> pd.DataFrame:
+    #création du dataframe
+    df=pd.DataFrame(catalogue)
+    #aplatir les lignes par albums
+    df = df.explode("albums")
+    #extraire les champs de chaque album
+    albums_df=pd.json_normalize(df["albums"])
     return df
 
 
 #Top 5 artistes par nombres total de streams
-def top5_artistes(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Retourne les 5 artistes ayant le plus grand nombre total de streams.
+def top5_artistes(df: pd.DataFrame) :
+   
+    #Retourne les 5 artistes ayant le plus grand nombre total de streams.
  
-    Colonnes : nom, genre, pays, total_streams
-    """
+    if df.empty :
+        return[]
     resultat = (
         df.groupby("nom")["streams"]
         .sum()
@@ -48,15 +31,14 @@ def top5_artistes(df: pd.DataFrame) -> pd.DataFrame:
 # 3. MOYENNE DES STREAMS PAR GENRE
  
 def moyenne_streams_par_genre(df: pd.DataFrame) -> pd.DataFrame:
-    """
-    Calcule la moyenne des streams par album pour chaque genre musical.
+    
+    #Calcule la moyenne des streams par album pour chaque genre musical.
  
-    Colonnes : genre, moyenne_streams
-    """
     resultat = (
         df.groupby("genre", as_index=False)["streams"]
         .mean()
-        .rename(columns={"album_streams": "moyenne_streams"})
+        
+    
         .sort_values(ascending=False)
         .reset_index(drop=True)
     )
