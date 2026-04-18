@@ -35,7 +35,7 @@ def top5_artistes(df: pd.DataFrame) -> pd.DataFrame:
     Colonnes : nom, genre, pays, total_streams
     """
     resultat = (
-        df.groupby(["artiste_id", "nom", "genre", "pays"], as_index=False)["album_streams"]
+        df.groupby("nom")["streams"]
         .sum()
         .rename(columns={"album_streams": "total_streams"})
         .sort_values("total_streams", ascending=False)
@@ -54,10 +54,10 @@ def moyenne_streams_par_genre(df: pd.DataFrame) -> pd.DataFrame:
     Colonnes : genre, moyenne_streams
     """
     resultat = (
-        df.groupby("genre", as_index=False)["album_streams"]
+        df.groupby("genre", as_index=False)["streams"]
         .mean()
         .rename(columns={"album_streams": "moyenne_streams"})
-        .sort_values("moyenne_streams", ascending=False)
+        .sort_values(ascending=False)
         .reset_index(drop=True)
     )
     resultat["moyenne_streams"] = resultat["moyenne_streams"].round(0).astype(int)
@@ -72,8 +72,8 @@ def albums_par_annee(df: pd.DataFrame) -> pd.DataFrame:
     Colonnes : annee, nombre_albums
     """
     resultat = (
-        df.dropna(subset=["album_annee"])  # exclure les années inconnues
-        .groupby("album_annee", as_index=False)["album_titre"]
+        df.dropna(subset=["annee"])  # exclure les années inconnues
+        .groupby("annee", as_index=False)["titre"]
         .count()
         .rename(columns={"album_annee": "annee", "album_titre": "nombre_albums"})
         .sort_values("annee")

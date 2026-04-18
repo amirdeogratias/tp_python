@@ -9,12 +9,11 @@ from label import (
     obtenir_detail_artiste
 )
 from analyse import (
-    charger_et_aplatir,
-    top5_albums,
-    moyenne_par_genre,
-    comptage_par_annee,
-    exporter_csv
-
+    charger_catalogue,
+    top5_artistes,
+    moyenne_streams_par_genre,
+    albums_par_annee,
+    exporter_rapport
 )
 
 
@@ -208,30 +207,30 @@ def main():
                 print("  r. Retour au menu principal")
                 print("-" * 45)
                 choix4 = input("Votre choix : ").strip().lower()
-
+              
                 if choix4 =="a":
 
                     try:
-                        five_artistes=top5_albums(catalogue)
+                        five_artistes=top5_artistes(catalogue)
                         print(f"les 5 artistes par streams sont :{five_artistes}\n")
                     except Exception as e:
                         print(f"  Erreur : {e}")
                 elif choix4 =="b":
                     try:
-                        moyenne_g=moyenne_par_genre(catalogue)
+                        moyenne_g=moyenne_streams_par_genre(catalogue)
                         print(f"la moyenne des streams par genre est :{moyenne_g}\n")
                     except Exception as e:
                         print(f"  Erreur : {e}")
                 elif choix4 =="c":
                     try:
-                        albums_annee=comptage_par_annee(catalogue)
+                        albums_annee=albums_par_annee(catalogue)
                         print(f"le nombre d,albums sorties par annee est :{albums_annee}\n")
                     except Exception as e:
                         print(f"  Erreur : {e}")
 
                 elif choix4 == "d":
                     try:
-                        message = exporter_csv(catalogue, chemin_csv)
+                        message = exporter_rapport(catalogue, chemin_csv)
                         print(f"  {message}")
                     except Exception as e:
                         print(f"  Erreur : {e}")
