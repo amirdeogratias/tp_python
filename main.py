@@ -9,7 +9,7 @@ from label import (
     obtenir_detail_artiste
 )
 from analyse import (
-    charger_catalogue,
+    charger_catalogue_pd,
     top5_artistes,
     moyenne_streams_par_genre,
     albums_par_annee,
@@ -18,7 +18,7 @@ from analyse import (
 
 
 def main():
-   
+   #définir les chemins
     chemin_json = "catalogue.json"
     chemin_csv  = "rapport.csv"
 
@@ -32,7 +32,7 @@ def main():
         sys.exit(1)
 
     while True:
-        # ── MENU PRINCIPAL ──────────────────────────────
+        # MENU PRINCIPAL
         print("\n" + "=" * 50)
         print("    SAHELSOUND RECORDS - CATALOGUE")
         print("=" * 50)
@@ -196,7 +196,8 @@ def main():
         #  OPTION 4 : STATISTIQUES 
         elif choix == "4":
             while True:
-                #catalogue_pandas=charger_et_aplatir("catalogue.json")
+                catalogue_pandas=charger_catalogue_pd("catalogue.json")
+                
                 print("\n" + "-" * 45)
                 print("  4. Statistiques et rapport")
                 print("-" * 45)
@@ -207,39 +208,37 @@ def main():
                 print("  r. Retour au menu principal")
                 print("-" * 45)
                 choix4 = input("Votre choix : ").strip().lower()
-              
-                if choix4 =="a":
+                try:
+                    if choix4 =="a":
 
-                    try:
-                        five_artistes=top5_artistes(catalogue)
+                    
+                        five_artistes=top5_artistes(catalogue_pandas)
                         print(f"les 5 artistes par streams sont :{five_artistes}\n")
-                    except Exception as e:
-                        print(f"  Erreur : {e}")
-                elif choix4 =="b":
-                    try:
-                        moyenne_g=moyenne_streams_par_genre(catalogue)
+                    
+                    elif choix4 =="b":
+                    
+                        moyenne_g=moyenne_streams_par_genre(catalogue_pandas)
                         print(f"la moyenne des streams par genre est :{moyenne_g}\n")
-                    except Exception as e:
-                        print(f"  Erreur : {e}")
-                elif choix4 =="c":
-                    try:
-                        albums_annee=albums_par_annee(catalogue)
+                    
+                    elif choix4 =="c":
+                    
+                        albums_annee=albums_par_annee(catalogue_pandas)
                         print(f"le nombre d,albums sorties par annee est :{albums_annee}\n")
-                    except Exception as e:
-                        print(f"  Erreur : {e}")
+                    
 
-                elif choix4 == "d":
-                    try:
-                        message = exporter_rapport(catalogue, chemin_csv)
+                    elif choix4 == "d":
+                    
+                        message = exporter_rapport(catalogue_pandas, chemin_csv)
                         print(f"  {message}")
-                    except Exception as e:
+                        print("rapport exporté avec succès\n")
+                    
+
+                    elif choix4 == "r":
+                        break
+                    else:
+                        print("  Choix invalide. Entrez a, b, c, d ou r.")
+                except Exception as e:
                         print(f"  Erreur : {e}")
-
-                elif choix4 == "r":
-                    break
-                else:
-                    print("  Choix invalide. Entrez a, b, c, d ou r.")
-
         #  OPTION 5 : QUITTER 
         elif choix == "5":
             print("\n  Au revoir et bonne ecoute !\n")

@@ -1,0 +1,78 @@
+﻿TOP 5 ARTISTES PAR STREAMS TOTAUX 
+,nom,streams_total
+1,Burna Boy,37600000.0
+2,Davido,33200000.0
+3,Aya Nakamura,33100000.0
+4,Fally Ipupa,16100000.0
+5,Dip Doundou Guiss,11300000.0
+
+------------------------------
+ MOYENNE DES STREAMS PAR GENRE 
+genre,streams_moyenne
+Afrobeats,11066666.666666666
+Afrobeat,8950000.0
+Afropop,5993333.333333333
+Coupé-Décalé,2800000.0
+Mandingue,2750000.0
+Hip-hop,2322500.0
+Mbalax,1226666.6666666667
+Blues Mandingue,705000.0
+zouk,
+
+------------------------------
+ NOMBRE D'ALBUMS PAR ANNEE 
+annee,nb_d'albums
+2020,6
+2018,4
+2019,3
+2016,3
+2022,3
+2014,2
+2015,2
+2013,2
+2023,2
+2009,1
+2010,1
+2012,1
+2004,1
+2017,1
+2021,1
+
+------------------------------
+ CATALOGUE COMPLET (DETAIL PAR ALBUM) 
+id,nom,genre,pays,titre,annee,streams
+ART-001,Fally Ipupa,Afrobeat,RDC,Power Kosa Leka,2013.0,4200000.0
+ART-001,Fally Ipupa,Afrobeat,RDC,Tokooos,2017.0,6800000.0
+ART-001,Fally Ipupa,Afrobeat,RDC,Tokooos II,2022.0,5100000.0
+ART-002,Burna Boy,Afrobeat,Nigeria,African Giant,2019.0,9500000.0
+ART-002,Burna Boy,Afrobeat,Nigeria,Twice as Tall,2020.0,12300000.0
+ART-002,Burna Boy,Afrobeat,Nigeria,"Love, Damini",2022.0,15800000.0
+ART-002,Burna Boy,Afrobeat,Nigeria,,,
+ART-003,Aya Nakamura,Afropop,Mali,Nakamura,2018.0,11000000.0
+ART-003,Aya Nakamura,Afropop,Mali,Journal intime,2019.0,8700000.0
+ART-003,Aya Nakamura,Afropop,Mali,DNK,2021.0,13400000.0
+ART-004,Sidiki Diabaté,Mandingue,Mali,Sababu,2015.0,2100000.0
+ART-004,Sidiki Diabaté,Mandingue,Mali,Histoire d'amour,2018.0,3400000.0
+ART-005,Serge Beynaud,Coupé-Décalé,Côte d'Ivoire,Mglacé,2013.0,1800000.0
+ART-005,Serge Beynaud,Coupé-Décalé,Côte d'Ivoire,Afrique en fête,2016.0,2900000.0
+ART-005,Serge Beynaud,Coupé-Décalé,Côte d'Ivoire,Motivation,2020.0,3700000.0
+ART-006,Youssou N'Dour,Mbalax,Sénégal,Egypt,2004.0,1500000.0
+ART-006,Youssou N'Dour,Mbalax,Sénégal,Dakar-Kingston,2010.0,980000.0
+ART-006,Youssou N'Dour,Mbalax,Sénégal,History,2015.0,1200000.0
+ART-007,Davido,Afrobeats,Nigeria,A Good Time,2019.0,8900000.0
+ART-007,Davido,Afrobeats,Nigeria,A Better Time,2020.0,10200000.0
+ART-007,Davido,Afrobeats,Nigeria,Timeless,2023.0,14100000.0
+ART-008,Ami Koité,Blues Mandingue,Mali,Haïra,2012.0,540000.0
+ART-008,Ami Koité,Blues Mandingue,Mali,Fenfo,2018.0,870000.0
+ART-009,Vano Baby,Hip-hop,Bénin,Gangster Romantique,2018.0,1200000.0
+ART-009,Vano Baby,Hip-hop,Bénin,Bénin City,2020.0,1850000.0
+ART-009,Vano Baby,Hip-hop,Bénin,L'Instinct,2022.0,2400000.0
+ART-010,Charlotte Dipanda,Afropop,Cameroun,Ntankama,2009.0,620000.0
+ART-010,Charlotte Dipanda,Afropop,Cameroun,La Voix du Pays,2014.0,890000.0
+ART-010,Charlotte Dipanda,Afropop,Cameroun,Liberté,2020.0,1350000.0
+ART-011,Master Soumy,Hip-hop,Mali,Le Griot Moderne,2016.0,730000.0
+ART-011,Master Soumy,Hip-hop,Mali,Réveil,2020.0,1100000.0
+ART-012,Dip Doundou Guiss,Hip-hop,Sénégal,Beuss Niki Tay,2014.0,2100000.0
+ART-012,Dip Doundou Guiss,Hip-hop,Sénégal,TLK,2016.0,3400000.0
+ART-012,Dip Doundou Guiss,Hip-hop,Sénégal,Lepp Fi Lanu Fekk,2023.0,5800000.0
+ART-013,bob,zouk,burkina,,,
